@@ -1,0 +1,15 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-load
+
+    ports:
+    - 80:80
+
+    volumes:
+    - ./nginx.conf:/etc/nginx/nginx.conf:ro #shares a local configuration file with a Docker container so the container uses your custom NGINX settings instead of the default ones.
+
+    extra_hosts:
+    - "host.docker.internal:host-gateway" #allows a Docker container to communicate with services running directly on your host machine.
+
+    restart: unless-stopped
